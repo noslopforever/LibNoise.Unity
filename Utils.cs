@@ -283,4 +283,35 @@ namespace LibNoise
 
         #endregion
     }
+
+    internal static class Mathf
+    {
+
+        public static double Deg2Rad = (Math.PI * 2) / 360;
+
+        public static T Clamp<T>(T val, T min, T max) where T : IComparable<T>
+        {
+            if (val.CompareTo(min) < 0)
+            {
+                val = min;
+            }
+            else if (val.CompareTo(max) > 0)
+            {
+                val = max;
+            }
+            return val;
+        }
+        public static float Clamp01(float val)
+        {
+            if (val < 0)
+            {
+                val = 0;
+            }
+            else if (val > 1)
+            {
+                val = 1;
+            }
+            return val;
+        }
+    }
 }

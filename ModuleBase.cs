@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Xml.Serialization;
-using UnityEngine;
 using Debug = System.Diagnostics.Debug;
 
 namespace LibNoise
@@ -114,34 +113,34 @@ namespace LibNoise
         /// <returns>The resulting output value.</returns>
         public abstract double GetValue(double x, double y, double z);
 
-        /// <summary>
-        /// Returns the output value for the given input coordinates.
-        /// </summary>
-        /// <param name="coordinate">The input coordinate.</param>
-        /// <returns>The resulting output value.</returns>
-        public double GetValue(Vector3 coordinate)
-        {
-            return GetValue(coordinate.x, coordinate.y, coordinate.z);
-        }
+        // /// <summary>
+        // /// Returns the output value for the given input coordinates.
+        // /// </summary>
+        // /// <param name="coordinate">The input coordinate.</param>
+        // /// <returns>The resulting output value.</returns>
+        // public double GetValue(Vector3 coordinate)
+        // {
+        //     return GetValue(coordinate.x, coordinate.y, coordinate.z);
+        // }
 
-        /// <summary>
-        /// Returns the output value for the given input coordinates.
-        /// </summary>
-        /// <param name="coordinate">The input coordinate.</param>
-        /// <returns>The resulting output value.</returns>
-        public double GetValue(ref Vector3 coordinate)
-        {
-            return GetValue(coordinate.x, coordinate.y, coordinate.z);
-        }
+        // /// <summary>
+        // /// Returns the output value for the given input coordinates.
+        // /// </summary>
+        // /// <param name="coordinate">The input coordinate.</param>
+        // /// <returns>The resulting output value.</returns>
+        // public double GetValue(ref Vector3 coordinate)
+        // {
+        //     return GetValue(coordinate.x, coordinate.y, coordinate.z);
+        // }
 
         #endregion
 
         #region IDisposable Members
 
-        [XmlIgnore]
-#if !XBOX360 && !ZUNE
-        [NonSerialized]
-#endif
+//         [XmlIgnore]
+// #if !XBOX360 && !ZUNE
+//         [NonSerialized]
+// #endif
         private bool _disposed;
 
         /// <summary>
