@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 using Debug = System.Diagnostics.Debug;
 
 namespace LibNoise.Operator

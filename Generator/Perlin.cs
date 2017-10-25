@@ -1,4 +1,5 @@
-﻿
+﻿using UnityEngine;
+
 namespace LibNoise.Generator
 {
     /// <summary>

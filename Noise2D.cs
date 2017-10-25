@@ -1,5 +1,6 @@
 using System;
 using System.Xml.Serialization;
+using UnityEngine;
 
 namespace LibNoise
 {
@@ -444,97 +445,97 @@ namespace LibNoise
             }
         }
 
-        // /// <summary>
-        // /// Creates a grayscale texture map for the current content of the noise map.
-        // /// </summary>
-        // /// <returns>The created texture map.</returns>
-        // public Texture2D GetTexture()
-        // {
-        //     return GetTexture(GradientPresets.Grayscale);
-        // }
+        /// <summary>
+        /// Creates a grayscale texture map for the current content of the noise map.
+        /// </summary>
+        /// <returns>The created texture map.</returns>
+        public Texture2D GetTexture()
+        {
+            return GetTexture(GradientPresets.Grayscale);
+        }
 
-        // /// <summary>
-        // /// Creates a texture map for the current content of the noise map.
-        // /// </summary>
-        // /// <param name="gradient">The gradient to color the texture map with.</param>
-        // /// <returns>The created texture map.</returns>
-        // public Texture2D GetTexture(Gradient gradient)
-        // {
-        //     var texture = new Texture2D(_width, _height);
-        //     var pixels = new Color[_width * _height];
-        //     for (var x = 0; x < _width; x++)
-        //     {
-        //         for (var y = 0; y < _height; y++)
-        //         {
-        //             float sample;
-        //             if (!float.IsNaN(_borderValue) &&
-        //                 (x == 0 || x == _width - _ucBorder || y == 0 || y == _height - _ucBorder))
-        //             {
-        //                 sample = _borderValue;
-        //             }
-        //             else
-        //             {
-        //                 sample = _data[x, y];
-        //             }
-        //             pixels[x + y * _width] = gradient.Evaluate((sample + 1) / 2);
-        //         }
-        //     }
-        //     texture.SetPixels(pixels);
-        //     texture.wrapMode = TextureWrapMode.Clamp;
-        //     texture.Apply();
-        //     return texture;
-        // }
+        /// <summary>
+        /// Creates a texture map for the current content of the noise map.
+        /// </summary>
+        /// <param name="gradient">The gradient to color the texture map with.</param>
+        /// <returns>The created texture map.</returns>
+        public Texture2D GetTexture(Gradient gradient)
+        {
+            var texture = new Texture2D(_width, _height);
+            var pixels = new Color[_width * _height];
+            for (var x = 0; x < _width; x++)
+            {
+                for (var y = 0; y < _height; y++)
+                {
+                    float sample;
+                    if (!float.IsNaN(_borderValue) &&
+                        (x == 0 || x == _width - _ucBorder || y == 0 || y == _height - _ucBorder))
+                    {
+                        sample = _borderValue;
+                    }
+                    else
+                    {
+                        sample = _data[x, y];
+                    }
+                    pixels[x + y * _width] = gradient.Evaluate((sample + 1) / 2);
+                }
+            }
+            texture.SetPixels(pixels);
+            texture.wrapMode = TextureWrapMode.Clamp;
+            texture.Apply();
+            return texture;
+        }
 
-        // /// <summary>
-        // /// Creates a normal map for the current content of the noise map.
-        // /// </summary>
-        // /// <param name="intensity">The scaling of the normal map values.</param>
-        // /// <returns>The created normal map.</returns>
-        // public Texture2D GetNormalMap(float intensity)
-        // {
-        //     var texture = new Texture2D(_width, _height);
-        //     var pixels = new Color[_width * _height];
-        //     for (var x = 0; x < _ucWidth; x++)
-        //     {
-        //         for (var y = 0; y < _ucHeight; y++)
-        //         {
-        //             var xPos = (_ucData[Mathf.Max(0, x - _ucBorder), y] -
-        //                         _ucData[Mathf.Min(x + _ucBorder, _height + _ucBorder), y]) / 2;
-        //             var yPos = (_ucData[x, Mathf.Max(0, y - _ucBorder)] -
-        //                         _ucData[x, Mathf.Min(y + _ucBorder, _width + _ucBorder)]) / 2;
-        //             var normalX = new Vector3(xPos * intensity, 0, 1);
-        //             var normalY = new Vector3(0, yPos * intensity, 1);
-        //             // Get normal vector
-        //             var normalVector = normalX + normalY;
-        //             normalVector.Normalize();
-        //             // Get color vector
-        //             var colorVector = Vector3.zero;
-        //             colorVector.x = (normalVector.x + 1) / 2;
-        //             colorVector.y = (normalVector.y + 1) / 2;
-        //             colorVector.z = (normalVector.z + 1) / 2;
-        //             // Start at (x + _ucBorder, y + _ucBorder) so that resulting normal map aligns with cropped data
-        //             if (x >= _ucBorder && y >= _ucBorder && x < _width + _ucBorder &&
-        //                 y < _height + _ucBorder)
-        //             {
-        //                 pixels[(x - _ucBorder) + (y - _ucBorder) * _width] = new Color(colorVector.x,
-        //                     colorVector.y, colorVector.z);
-        //             }
-        //         }
-        //     }
-        //     texture.SetPixels(pixels);
-        //     texture.wrapMode = TextureWrapMode.Clamp;
-        //     texture.Apply();
-        //     return texture;
-        // }
+        /// <summary>
+        /// Creates a normal map for the current content of the noise map.
+        /// </summary>
+        /// <param name="intensity">The scaling of the normal map values.</param>
+        /// <returns>The created normal map.</returns>
+        public Texture2D GetNormalMap(float intensity)
+        {
+            var texture = new Texture2D(_width, _height);
+            var pixels = new Color[_width * _height];
+            for (var x = 0; x < _ucWidth; x++)
+            {
+                for (var y = 0; y < _ucHeight; y++)
+                {
+                    var xPos = (_ucData[Mathf.Max(0, x - _ucBorder), y] -
+                                _ucData[Mathf.Min(x + _ucBorder, _height + _ucBorder), y]) / 2;
+                    var yPos = (_ucData[x, Mathf.Max(0, y - _ucBorder)] -
+                                _ucData[x, Mathf.Min(y + _ucBorder, _width + _ucBorder)]) / 2;
+                    var normalX = new Vector3(xPos * intensity, 0, 1);
+                    var normalY = new Vector3(0, yPos * intensity, 1);
+                    // Get normal vector
+                    var normalVector = normalX + normalY;
+                    normalVector.Normalize();
+                    // Get color vector
+                    var colorVector = Vector3.zero;
+                    colorVector.x = (normalVector.x + 1) / 2;
+                    colorVector.y = (normalVector.y + 1) / 2;
+                    colorVector.z = (normalVector.z + 1) / 2;
+                    // Start at (x + _ucBorder, y + _ucBorder) so that resulting normal map aligns with cropped data
+                    if (x >= _ucBorder && y >= _ucBorder && x < _width + _ucBorder &&
+                        y < _height + _ucBorder)
+                    {
+                        pixels[(x - _ucBorder) + (y - _ucBorder) * _width] = new Color(colorVector.x,
+                            colorVector.y, colorVector.z);
+                    }
+                }
+            }
+            texture.SetPixels(pixels);
+            texture.wrapMode = TextureWrapMode.Clamp;
+            texture.Apply();
+            return texture;
+        }
 
         #endregion
 
         #region IDisposable Members
 
-//         [XmlIgnore]
-// #if !XBOX360 && !ZUNE
-//         [NonSerialized]
-// #endif
+        [XmlIgnore]
+#if !XBOX360 && !ZUNE
+        [NonSerialized]
+#endif
             private bool _disposed;
 
         /// <summary>
